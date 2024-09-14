@@ -35,81 +35,80 @@ public class turnbased : MonoBehaviour
         SetupFight();
         StartCoroutine(SetupFight());
         dialogueText.text = "A chonky boy has risen.";
+        playerAnim.Play("playerIdle");
     }
 
 //Waits for a second before making it the player's turn + dialogue
     IEnumerator SetupFight()
     {
-    yield return new WaitForSeconds(1f);
-    state = TurnBased.PLAYERTURN;
-    dialogueText.text = "Your turn!.";
-    Debug.Log("Player turn");
+        yield return new WaitForSeconds(2f);
+        state = TurnBased.PLAYERTURN;
+        dialogueText.text = "Your turn!.";
     }
 
+   public void OnAttackButton()
+       {
+       //On button click, start the PlayerAttack
+       if (state != TurnBased.PLAYERTURN)
+           return;
+       StartCoroutine(PlayerAttack());
+       }
 
     IEnumerator PlayerAttack()
     {
-    playerAnim.Play("playerAttack");
-    bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
-    enemyUI.SetHP(enemyUnit.currentHP);
+        playerAnim.Play("playerAttack");
+        Debug.Log("Player attack anim");
 
-    yield return new WaitForSeconds(1f);
+        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+        enemyUI.SetHP(enemyUnit.currentHP);
 
-    if (isDead)
-    {
-    //If enemy is dead, you won! Starts EndBattle sequence
-    state = TurnBased.WON;
-    EndBattle();
-    }
-    else
-    {
-    //If enemy is not dead, swap turns
-    state = TurnBased.ENEMYTURN;
-    StartCoroutine(EnemyTurn());
-    }
+        yield return new WaitForSeconds(1f);
+
+        if (isDead)
+        {
+            //If enemy is dead, you won! Starts EndBattle sequence
+            state = TurnBased.WON;
+            EndBattle();
+        }
+        else
+        {
+            //If enemy is not dead, swap turns
+            state = TurnBased.ENEMYTURN;
+            StartCoroutine(EnemyTurn());
+        }
     }
 
     IEnumerator EnemyTurn()
    {
    //Hahaha chonky's turn
        dialogueText.text = "Chonky's turn.";
-       Debug.Log("Enemy turn");
-    yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f);
 
-    bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
-    playerUI.SetHP(playerUnit.currentHP);
+        bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
+        playerUI.SetHP(playerUnit.currentHP);
 
-    yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f);
 
-    if(isDead)
-    {
-    //If player is dead, you lost
-    state = TurnBased.LOST;
-    }
+        if(isDead)
+        {
+            //If player is dead, you lost
+            state = TurnBased.LOST;
+        }
     else
-    {
-    //If player isn't dead, it's players turn
-    state = TurnBased.PLAYERTURN;
-        dialogueText.text = "Your turn!";
-        Debug.Log("Player turn");
-    }
+        {
+            //If player isn't dead, it's players turn
+            state = TurnBased.PLAYERTURN;
+            dialogueText.text = "Your turn!";
+        }
 
    }
 
-    public void OnAttackButton()
-    {
-    //On button click, start the PlayerAttack
-    if (state != TurnBased.PLAYERTURN)
-        return;
-    StartCoroutine(PlayerAttack());
-    }
-
     public void EndBattle()
     {
-    //Why did you kill chonky
-    if (state == TurnBased.WON);
-    dialogueText.text = "YOU'VE SLAIN CHONKY!";
-    //go to win scene
+        //Why did you kill chonky
+        if (state == TurnBased.WON);
+        dialogueText.text = "YOU'VE SLAIN CHONKY!";
+        //go to win scene
     }
 
 }
