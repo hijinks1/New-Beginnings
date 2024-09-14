@@ -21,8 +21,9 @@ public class turnbased : MonoBehaviour
     public stats playerUnit;
     public stats enemyUnit;
 
-//Animations for player
+//Animations for player and enemy
     [SerializeField] public Animator playerAnim;
+    [SerializeField] public Animator enemyAnim;
 
 //Drag and drop UI for dialogue text
     [SerializeField] public TextMeshProUGUI dialogueText;
@@ -35,7 +36,7 @@ public class turnbased : MonoBehaviour
         SetupFight();
         StartCoroutine(SetupFight());
         dialogueText.text = "A chonky boy has risen.";
-        playerAnim.Play("playerIdle");
+        //playerAnim.Play("playerIdle");
     }
 
 //Waits for a second before making it the player's turn + dialogue
@@ -84,6 +85,7 @@ public class turnbased : MonoBehaviour
        dialogueText.text = "Chonky's turn.";
         yield return new WaitForSeconds(1f);
 
+        enemyAnim.Play("enemyAttack");
         bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
         playerUI.SetHP(playerUnit.currentHP);
 

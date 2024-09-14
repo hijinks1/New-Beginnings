@@ -833,6 +833,7 @@ MonoBehaviour:
   playerUnit: {fileID: 1371680945}
   enemyUnit: {fileID: 1138875745}
   playerAnim: {fileID: 1371680946}
+  enemyAnim: {fileID: 1138875746}
   dialogueText: {fileID: 67156987}
 --- !u!4 &499513699
 Transform:
