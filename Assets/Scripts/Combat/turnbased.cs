@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public enum TurnBased { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
@@ -27,6 +28,9 @@ public class turnbased : MonoBehaviour
 
 //Drag and drop UI for dialogue text
     [SerializeField] public TextMeshProUGUI dialogueText;
+
+
+   // public Approval momApproval;
 
       void Start()
     {
@@ -55,8 +59,15 @@ public class turnbased : MonoBehaviour
        StartCoroutine(PlayerAttack());
        }
 
+       public void OnRunButton()
+       {
+           SceneManager.LoadScene("Mom");
+           //maybe make a downside? One less mom approval?
+       }
+
     IEnumerator PlayerAttack()
     {
+        //animation
         playerAnim.Play("playerAttack");
         Debug.Log("Player attack anim");
 
@@ -69,7 +80,7 @@ public class turnbased : MonoBehaviour
         {
             //If enemy is dead, you won! Starts EndBattle sequence
             state = TurnBased.WON;
-            EndBattle();
+            StartCoroutine(EndBattle());
         }
         else
         {
@@ -85,18 +96,22 @@ public class turnbased : MonoBehaviour
        dialogueText.text = "Chonky's turn.";
         yield return new WaitForSeconds(1f);
 
+        //animation
         enemyAnim.Play("enemyAttack");
+        
         bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
         playerUI.SetHP(playerUnit.currentHP);
-
+        
         yield return new WaitForSeconds(1f);
 
         if(isDead)
         {
             //If player is dead, you lost
             state = TurnBased.LOST;
+            //Lose approval
+            //Send back to mom
         }
-    else
+        else
         {
             //If player isn't dead, it's players turn
             state = TurnBased.PLAYERTURN;
@@ -105,12 +120,15 @@ public class turnbased : MonoBehaviour
 
    }
 
-    public void EndBattle()
+    //public void EndBattle()
+    IEnumerator EndBattle()
     {
         //Why did you kill chonky
         if (state == TurnBased.WON);
         dialogueText.text = "YOU'VE SLAIN CHONKY!";
-        //go to win scene
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("Mom");
+        //Add to approval
     }
 
 }
