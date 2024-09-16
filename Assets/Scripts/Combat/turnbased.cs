@@ -28,10 +28,6 @@ public class turnbased : MonoBehaviour
 
 //Drag and drop UI for dialogue text
     [SerializeField] public TextMeshProUGUI dialogueText;
-
-
-    public int approvalVariable;
-
       void Start()
     {
     //On start, the state is START
@@ -61,10 +57,11 @@ public class turnbased : MonoBehaviour
 
        public void OnRunButton()
        {
-           //-1 approval
-           Debug.Log("-1 Approval");
-           PlayerPrefs.SetInt("Approval", PlayerPrefs.GetInt("Approval") - 1);
            SceneManager.LoadScene("Mom");
+
+           //-1 approval
+           //Debug.Log("-1 Approval");
+           PlayerPrefs.SetInt("Approval", PlayerPrefs.GetInt("Approval") - 1);
        }
 
     IEnumerator PlayerAttack()
@@ -73,6 +70,8 @@ public class turnbased : MonoBehaviour
         playerAnim.Play("playerAttack");
         Debug.Log("Player attack anim");
 
+        //bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+        
         bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
         enemyUI.SetHP(enemyUnit.currentHP);
 
@@ -83,10 +82,10 @@ public class turnbased : MonoBehaviour
             //If enemy is dead, you won! Starts EndBattle sequence
             state = TurnBased.WON;
             StartCoroutine(EndBattle());
-            Debug.Log("+1 Approval");
+            Debug.Log("+2 Approval");
             
             //+1 approval
-            PlayerPrefs.SetInt("Approval", PlayerPrefs.GetInt("Approval") + 1);
+            PlayerPrefs.SetInt("Approval", PlayerPrefs.GetInt("Approval") + 2);
         }
         else
         {
@@ -104,18 +103,20 @@ public class turnbased : MonoBehaviour
 
         //animation
         enemyAnim.Play("enemyAttack");
-        
+
         bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
         playerUI.SetHP(playerUnit.currentHP);
         
         yield return new WaitForSeconds(1f);
 
         if(isDead)
-        {
+        {          
             //If player is dead, you lost
             state = TurnBased.LOST;
-            PlayerPrefs.SetInt("Approval", PlayerPrefs.GetInt("Approval") - 1);
+            dialogueText.text = "YOU'VE BEEN SLAIN BY CHONKY! YEOWCH!";
+            yield return new WaitForSeconds(2f);
             SceneManager.LoadScene("Mom");
+            PlayerPrefs.SetInt("Approval", PlayerPrefs.GetInt("Approval") - 2);
 
         }
         else

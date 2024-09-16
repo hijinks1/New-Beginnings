@@ -8,10 +8,18 @@ public class stats : MonoBehaviour
     public int damage;
     public int maxHP;
     public int currentHP;
+    public int mindmg;
+    public int maxdmg;
 
     public bool TakeDamage(int dmg)
  {
-    currentHP -= dmg;
+     int totalDamage = dmg + Random.Range(mindmg, maxdmg);
+     Debug.Log(totalDamage);
+     currentHP = currentHP - totalDamage;
+     //currentHP -= Random.Range(mindmg,maxdmg);
+     
+     
+    //currentHP -= dmg;
 
     if (currentHP <= 0)
     {
