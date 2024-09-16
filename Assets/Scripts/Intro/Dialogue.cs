@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class Dialogue : MonoBehaviour
 {
+    //THIS IS THE INTRO SCENE!
     
     public TextAsset _InkJsonFile;
     public Story _StoryScript;
@@ -17,15 +18,17 @@ public class Dialogue : MonoBehaviour
 
     public static Story story;
     public float typingSpeed = .05f;
+    
+    
 
-    private void Start()
+    public void Start()
     {
         LoadStory();
     }
 
     void Update()
     {
-        //If space is pressed, show next line
+        //If mouse is clicked, show next line
         if (Input.GetMouseButtonDown(0))
         {
             DisplayNextLine();
@@ -34,6 +37,7 @@ public class Dialogue : MonoBehaviour
 
     void LoadStory()
     {
+        //loads the ink file
         _StoryScript = new Story(_InkJsonFile.text);
     }
 
@@ -45,6 +49,7 @@ public class Dialogue : MonoBehaviour
             text = text?.Trim(); //removes white space from the text
             DialogueText.text = text; //sets the text in the dialogue box to the next piece of text
             
+            StopAllCoroutines();
             StartCoroutine(TypeSentence(text));
 
         }

@@ -30,7 +30,7 @@ public class turnbased : MonoBehaviour
     [SerializeField] public TextMeshProUGUI dialogueText;
 
 
-   // public Approval momApproval;
+    public int approvalVariable;
 
       void Start()
     {
@@ -48,7 +48,7 @@ public class turnbased : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         state = TurnBased.PLAYERTURN;
-        dialogueText.text = "Your turn!.";
+        dialogueText.text = "Your turn!";
     }
 
    public void OnAttackButton()
@@ -61,8 +61,10 @@ public class turnbased : MonoBehaviour
 
        public void OnRunButton()
        {
+           //-1 approval
+           Debug.Log("-1 Approval");
+           PlayerPrefs.SetInt("Approval", PlayerPrefs.GetInt("Approval") - 1);
            SceneManager.LoadScene("Mom");
-           //maybe make a downside? One less mom approval?
        }
 
     IEnumerator PlayerAttack()
@@ -81,6 +83,10 @@ public class turnbased : MonoBehaviour
             //If enemy is dead, you won! Starts EndBattle sequence
             state = TurnBased.WON;
             StartCoroutine(EndBattle());
+            Debug.Log("+1 Approval");
+            
+            //+1 approval
+            PlayerPrefs.SetInt("Approval", PlayerPrefs.GetInt("Approval") + 1);
         }
         else
         {
@@ -108,8 +114,9 @@ public class turnbased : MonoBehaviour
         {
             //If player is dead, you lost
             state = TurnBased.LOST;
-            //Lose approval
-            //Send back to mom
+            PlayerPrefs.SetInt("Approval", PlayerPrefs.GetInt("Approval") - 1);
+            SceneManager.LoadScene("Mom");
+
         }
         else
         {

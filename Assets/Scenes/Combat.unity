@@ -806,6 +806,7 @@ GameObject:
   m_Component:
   - component: {fileID: 499513699}
   - component: {fileID: 499513698}
+  - component: {fileID: 499513700}
   m_Layer: 0
   m_Name: TurnBased
   m_TagString: Untagged
@@ -850,6 +851,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &499513700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499513697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6091e90e97f1cd46a466371e6dd0b8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endTurnButton: {fileID: 819163748}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1163,8 +1177,9 @@ GameObject:
   - component: {fileID: 819163750}
   - component: {fileID: 819163749}
   - component: {fileID: 819163748}
+  - component: {fileID: 819163751}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1246,6 +1261,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 819163751}
+        m_TargetAssemblyTypeName: NoButton, Assembly-CSharp
+        m_MethodName: StartTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &819163749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1284,6 +1311,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 819163746}
   m_CullTransparentMesh: 1
+--- !u!114 &819163751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819163746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6091e90e97f1cd46a466371e6dd0b8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endTurnButton: {fileID: 819163748}
 --- !u!1 &1040553404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1614,7 +1654,7 @@ GameObject:
   - component: {fileID: 1203335339}
   - component: {fileID: 1203335338}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Run
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
