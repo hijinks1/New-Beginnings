@@ -29,7 +29,7 @@ public class Dialogue : MonoBehaviour
     void Update()
     {
         //If mouse is clicked, show next line
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
             DisplayNextLine();
         }

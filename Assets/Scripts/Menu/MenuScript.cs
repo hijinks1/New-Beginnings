@@ -16,7 +16,7 @@ public class MenuScript : MonoBehaviour
 
     public void onSavedGame()
     {
-        SceneManager.LoadScene("Mom");
+        SceneManager.LoadScene("Intro");
     }
     
 }

@@ -18,7 +18,7 @@ public class BreakOut : MonoBehaviour
     
     void Update()
     {
-        // if mouse is clicked and the spriteNumber is less than the SpriteArray length, changesprite
+        // if space is clicked and the spriteNumber is less than the SpriteArray length, changesprite
         //spriteArray.Length basically just means that if the array had 0,1,2,3, the length is 4 
         if (Input.GetMouseButtonDown(0) && spriteNumber < spriteArray.Length)
         {

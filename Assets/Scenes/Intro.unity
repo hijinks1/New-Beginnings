@@ -226,7 +226,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press space to break out.
+  m_text: Click to break out.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a087b7a6f37cd9a49bf21b3e1b1543ad, type: 2}
   m_sharedMaterial: {fileID: -3644814639507874377, guid: a087b7a6f37cd9a49bf21b3e1b1543ad, type: 2}
