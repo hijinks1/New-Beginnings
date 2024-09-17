@@ -16,11 +16,7 @@ public class stats : MonoBehaviour
      int totalDamage = dmg + Random.Range(mindmg, maxdmg);
      Debug.Log(totalDamage);
      currentHP = currentHP - totalDamage;
-     //currentHP -= Random.Range(mindmg,maxdmg);
      
-     
-    //currentHP -= dmg;
-
     if (currentHP <= 0)
     {
     //unit has died

@@ -11,11 +11,12 @@ public class MenuScript : MonoBehaviour
     //basically just deletes all the player prefs that saved your approval stats 
     {
         PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene("Intro");
     }
 
     public void onSavedGame()
     {
-        SceneManager.LoadScene("Intro");
+        SceneManager.LoadScene("Mom");
     }
     
 }

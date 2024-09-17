@@ -28,6 +28,10 @@ public class turnbased : MonoBehaviour
 
 //Drag and drop UI for dialogue text
     [SerializeField] public TextMeshProUGUI dialogueText;
+    
+    public AudioSource audioSource;
+
+    
       void Start()
     {
     //On start, the state is START
@@ -37,6 +41,8 @@ public class turnbased : MonoBehaviour
         StartCoroutine(SetupFight());
         dialogueText.text = "A chonky boy has risen.";
         //playerAnim.Play("playerIdle");
+        audioSource = GetComponent<AudioSource>();
+
     }
 
 //Waits for a second before making it the player's turn + dialogue
@@ -69,6 +75,7 @@ public class turnbased : MonoBehaviour
         //animation
         playerAnim.Play("playerAttack");
         Debug.Log("Player attack anim");
+        audioSource.Play();
 
         //bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
         
@@ -103,6 +110,7 @@ public class turnbased : MonoBehaviour
 
         //animation
         enemyAnim.Play("enemyAttack");
+        audioSource.Play();
 
         bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
         playerUI.SetHP(playerUnit.currentHP);
